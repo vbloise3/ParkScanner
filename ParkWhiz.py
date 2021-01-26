@@ -30,7 +30,8 @@ def getSpecificDate(dateAvailability, location):
 if __name__ == '__main__':
     date = str(sys.argv[1])
     location = str(sys.argv[2])
-    phoneNumber = str(sys.argv[3])
+    if len(sys.argv) > 3:
+        phoneNumber = str(sys.argv[3])
     checkOut = False
     checkoutTries = 1
     if len(sys.argv) > 3:
@@ -45,10 +46,13 @@ if __name__ == '__main__':
             # add logic here to send text message
             bookUrl = "https://www.parkwhiz.com" + isAvailable['site_url']
             dateAvailable = str(isAvailable['start_time'])[0:10]
-            client.publish(
-                PhoneNumber=phoneNumber,
-                Message= dateAvailable + '\n' + str(isAvailable['availability']) + '\n' + bookUrl
-                )
+            #client.publish(
+            #    PhoneNumber=phoneNumber,
+            #    Message= dateAvailable + '\n' + str(isAvailable['availability']) + '\n' + bookUrl
+            #    )
+            topic_arn = 'arn:aws:sns:us-east-1:001178231653:ParkingCopper'
+            theMessage= dateAvailable + '\n' + str(isAvailable['availability']) + '\n' + bookUrl
+            client.publish(Message=theMessage, TopicArn=topic_arn)
             print(isAvailable['site_url'])
             print(isAvailable['availability'])
             print("found a spot for " + date + ' after ' + str(checkoutTries) + ' times')

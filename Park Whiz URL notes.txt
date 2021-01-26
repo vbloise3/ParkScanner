@@ -1,0 +1,8 @@
+# API call to get Copper Mountain id
+https://api.parkwhiz.com/v4/venues?q=name:Copper%20Mountain
+
+# API call to get Copper mMountain parking availability
+https://api.parkwhiz.com/v4/venues/448854/events/?&pretty=true&fields=venue::default,event::default,event:availability,site_url
+
+# Example day book url
+https://www.parkwhiz.com/copper-mountain-parking-3/jan-26-2021-daily-parking-1076655/
